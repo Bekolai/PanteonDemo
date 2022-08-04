@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class MovementController : MonoBehaviour
 {
 
@@ -15,7 +16,7 @@ public class MovementController : MonoBehaviour
 
 
     float _playerSpeed;
-    float _xSpeed;
+    float _xSpeed,direction;
     public Rigidbody rb;
 
     public Camera mainCamera;
@@ -34,7 +35,7 @@ public class MovementController : MonoBehaviour
     {
 
          Movement();
-    
+     rb.velocity = Vector3.forward * playerSpeed * Time.deltaTime;
 
       
          
@@ -43,44 +44,36 @@ public class MovementController : MonoBehaviour
    
    
     }
+    private void Update()
+    {
+        if (Input.GetMouseButton(0))
+        {
+
+            var position = Input.mousePosition;
+
+            _distanceToScreen = mainCamera.WorldToScreenPoint(gameObject.transform.position).z;
+            _mousePos = mainCamera.ScreenToWorldPoint(new Vector3(position.x, position.y, _distanceToScreen));
+            direction = _xSpeed;
+            direction = _mousePos.x > transform.position.x ? direction : -direction;
+
+
+        }
+    }
 
 
     void Movement()
     {
-     transform.Translate(0, 0, Time.deltaTime * _playerSpeed);
-
-        if (Input.GetMouseButtonDown(0))
-        {
-
-
-        }
-
-        if (Input.GetMouseButton(0))
-         { 
-         
-          var position = Input.mousePosition;
-         
-            _distanceToScreen = mainCamera.WorldToScreenPoint(gameObject.transform.position).z;
-          _mousePos = mainCamera.ScreenToWorldPoint(new Vector3(position.x, position.y, _distanceToScreen));
-          float direction = _xSpeed;
-          direction = _mousePos.x > transform.position.x ? direction : -direction;
+       
 
           if (Math.Abs(_mousePos.x - transform.position.x) > 0.25f )
             {
-            transform.Translate(Time.deltaTime * direction, 0, 0);
-         
+             transform.Translate(Time.deltaTime * direction, 0, 0);
+             
             } 
      
-            var pos = transform.position;
-            pos.x = Mathf.Clamp(transform.position.x, -xClamp, xClamp);
-            transform.position = pos;
-            
-        }
-       
-        if(Input.GetMouseButtonUp(0))
-        {
-            
-        }
+            var pos = transform.position; // TO CHECK IF CHARACTER IS IN X AXIS BORDER 
+            pos.x = Mathf.Clamp(transform.position.x, -xClamp, xClamp);//
+            transform.position = pos;//
 
 
 
