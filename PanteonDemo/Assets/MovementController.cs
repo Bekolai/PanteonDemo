@@ -9,19 +9,19 @@ public class MovementController : MonoBehaviour
 
 
     [Header("Movement")]
-    [SerializeField] public float playerSpeed = 10f;
-    [SerializeField] public float xSpeed = 10f;
+    [SerializeField] public float playerSpeed = 10f; //temp playerspeed
+    [SerializeField] public float xSpeed = 10f;//temp xspeed
     [SerializeField] public float xClamp = 3.5f;
 
 
 
-    float _playerSpeed;
-    float _xSpeed,direction;
-    public Rigidbody rb;
+    float _playerSpeed; //used playerspeed
+    float _xSpeed; //used xspeed
+    float direction;
+    Rigidbody rb;
 
-    public Camera mainCamera;
-    private float _distanceToScreen;
-    private Vector3 _mousePos;
+     float _distanceToScreen;
+     Vector3 _mousePos;
     private void Start()
     {
 
@@ -35,14 +35,8 @@ public class MovementController : MonoBehaviour
     {
 
          Movement();
-     rb.velocity = Vector3.forward * playerSpeed * Time.deltaTime;
+        
 
-      
-         
-          
-     
-   
-   
     }
     private void Update()
     {
@@ -51,11 +45,17 @@ public class MovementController : MonoBehaviour
 
             var position = Input.mousePosition;
 
-            _distanceToScreen = mainCamera.WorldToScreenPoint(gameObject.transform.position).z;
-            _mousePos = mainCamera.ScreenToWorldPoint(new Vector3(position.x, position.y, _distanceToScreen));
+            _distanceToScreen = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
+            _mousePos = Camera.main.ScreenToWorldPoint(new Vector3(position.x, position.y, _distanceToScreen));
             direction = _xSpeed;
             direction = _mousePos.x > transform.position.x ? direction : -direction;
 
+
+        }
+        if (Input.GetMouseButton(1))
+        {
+
+            CollideManager.Instance.HandleRespawn(gameObject);
 
         }
     }
@@ -63,19 +63,16 @@ public class MovementController : MonoBehaviour
 
     void Movement()
     {
-       
-
-          if (Math.Abs(_mousePos.x - transform.position.x) > 0.25f )
-            {
-             transform.Translate(Time.deltaTime * direction, 0, 0);
+        rb.velocity = Vector3.forward * _playerSpeed * Time.deltaTime;
+        if (Math.Abs(_mousePos.x - transform.position.x) > 0.25f )
+         {
+          transform.Translate(Time.deltaTime * direction, 0, 0);
              
-            } 
+         } 
      
-            var pos = transform.position; // TO CHECK IF CHARACTER IS IN X AXIS BORDER 
-            pos.x = Mathf.Clamp(transform.position.x, -xClamp, xClamp);//
-            transform.position = pos;//
-
-
+         var pos = transform.position; // TO CHECK IF CHARACTER IS IN X AXIS BORDER 
+         pos.x = Mathf.Clamp(transform.position.x, -xClamp, xClamp);//
+         transform.position = pos;//
 
     }
     public void StopMovement()
