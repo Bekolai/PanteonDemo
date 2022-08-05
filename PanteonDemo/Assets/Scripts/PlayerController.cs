@@ -27,5 +27,6 @@ public class PlayerController : MonoBehaviour
             movementController.StopMovement();
             CollideManager.Instance.HandleRespawn(gameObject);
         }
+
     }
 }

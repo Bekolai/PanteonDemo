@@ -52,12 +52,7 @@ public class MovementController : MonoBehaviour
 
 
         }
-        if (Input.GetMouseButton(1))
-        {
 
-            CollideManager.Instance.HandleRespawn(gameObject);
-
-        }
     }
 
 
