@@ -32,10 +32,12 @@ public class CollideManager : MonoBehaviour
     }
     public void HandleRespawn(GameObject gameObj)
     {
+        gameObj.GetComponent<Animator>().SetTrigger("Respawn");
+        gameObj.transform.GetChild(3).GetComponent<ParticleSystem>().Play();
         float randomNumber = Random.Range(-1f, 1f);
         float randomNumber2 = Random.Range(0, 1);
         gameObj.transform.DOMove(spawner.transform.position+new Vector3(randomNumber,0,0), 1f);
-        gameObj.transform.GetChild(3).GetComponent<ParticleSystem>().Play();
+       
     }
 
 }

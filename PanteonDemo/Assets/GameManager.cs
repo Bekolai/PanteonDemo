@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
         {
             o.GetComponent<AIcontroller>().StartGame();
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         countdownText.gameObject.SetActive(false);
     }
     void checkRanking()
