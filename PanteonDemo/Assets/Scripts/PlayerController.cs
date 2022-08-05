@@ -37,4 +37,9 @@ public class PlayerController : MonoBehaviour
         movementController.StartMovement();
       
     }
+    public void StartGame()
+    {
+        GetComponent<Animator>().SetBool("Run", true);
+        movementController.StartMovement();
+    }
 }

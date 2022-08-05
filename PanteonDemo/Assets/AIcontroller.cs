@@ -9,7 +9,7 @@ public class AIcontroller : MonoBehaviour
      GameObject finish;
     NavMeshAgent navMeshAgent;
     Vector3 velocity;
-    public bool collided;
+    bool collided,started;
     // Start is called before the first frame update
     void Start()
     {  
@@ -31,8 +31,8 @@ public class AIcontroller : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log(navMeshAgent.nextPosition);
-        if (!collided)
+
+        if (!collided &&started)
 
         {
             transform.position = Vector3.SmoothDamp(transform.position,
@@ -52,9 +52,11 @@ public class AIcontroller : MonoBehaviour
             
         }
         if (collision.gameObject.CompareTag("Finish"))
-        {
+        {   
+            GameManager.Instance.AIfinished(gameObject);
             transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 0.5f);
             Destroy(gameObject, 0.5f);
+           
 
         }
 
@@ -66,5 +68,11 @@ public class AIcontroller : MonoBehaviour
         yield return new WaitForSeconds(1f); 
         navMeshAgent.nextPosition = transform.position;
         collided = false;
+    }
+    public void StartGame()
+    {
+        GetComponent<Animator>().SetBool("Run", true);
+        started = true;
+        navMeshAgent.nextPosition = transform.position; //reset navmesh path
     }
 }

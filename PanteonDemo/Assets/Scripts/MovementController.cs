@@ -26,7 +26,7 @@ public class MovementController : MonoBehaviour
     {
 
 
-        StartMovement();
+        StopMovement();
         rb = GetComponent<Rigidbody>();
     }
 

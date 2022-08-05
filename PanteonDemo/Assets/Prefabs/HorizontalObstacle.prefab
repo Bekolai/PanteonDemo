@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4813668583800457987}
   - component: {fileID: 6128277261763545557}
   - component: {fileID: -1218284131028994927}
+  - component: {fileID: 8172550493434102939}
   m_Layer: 0
   m_Name: HorizontalObstacle
   m_TagString: Collider
@@ -96,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xClamp: 1.1
-  speed: 2
+  speed: 1
 --- !u!65 &-1218284131028994927
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -110,3 +111,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.09466179, y: 0.25618502, z: 0.09322367}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &8172550493434102939
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6470945210977086166}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.08, y: 0.128, z: 0.08}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
