@@ -26,7 +26,15 @@ public class PlayerController : MonoBehaviour
         {
             movementController.StopMovement();
             CollideManager.Instance.HandleRespawn(gameObject);
+            StartCoroutine(collideReset());
         }
 
+    }
+    IEnumerator collideReset()
+    {
+
+        yield return new WaitForSeconds(1f);
+        movementController.StartMovement();
+      
     }
 }
