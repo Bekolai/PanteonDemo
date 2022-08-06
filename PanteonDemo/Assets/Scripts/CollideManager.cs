@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class CollideManager : MonoBehaviour
 {
-    Transform spawner;
+   // Transform spawner;
     public static CollideManager Instance { get; private set; }
     private void Awake()
     {
@@ -17,7 +17,7 @@ public class CollideManager : MonoBehaviour
         {
             Instance = this;
         }
-        spawner = GameObject.Find("Spawner").GetComponent<Transform>();
+     //   spawner = GameObject.Find("Spawner").GetComponent<Transform>();
     }
     // Start is called before the first frame update
     void Start()
@@ -30,7 +30,7 @@ public class CollideManager : MonoBehaviour
     {
         
     }
-    public void HandleRespawn(GameObject gameObj)
+    public void HandleRespawn(GameObject gameObj, Transform spawner)
     {
         gameObj.GetComponent<Animator>().SetTrigger("Respawn");
         gameObj.transform.GetChild(3).GetComponent<ParticleSystem>().Play();

@@ -6,7 +6,8 @@ using DG.Tweening;
 
 public class AIcontroller : MonoBehaviour
 {
-     GameObject finish;
+    GameObject finish;
+     Transform checkPoint;
     NavMeshAgent navMeshAgent;
     Vector3 velocity;
     bool collided,started;
@@ -47,7 +48,7 @@ public class AIcontroller : MonoBehaviour
         if (collision.gameObject.CompareTag("Collider"))
         {
             collided = true;
-            CollideManager.Instance.HandleRespawn(gameObject);
+            CollideManager.Instance.HandleRespawn(gameObject,checkPoint);
             StartCoroutine(collideReset());
             
         }
@@ -62,10 +63,12 @@ public class AIcontroller : MonoBehaviour
 
 
     }
+ 
     IEnumerator collideReset()
     {
-      
-        yield return new WaitForSeconds(1f); 
+        GetComponent<Animator>().SetBool("Run", false);
+        yield return new WaitForSeconds(1f);
+        GetComponent<Animator>().SetBool("Run", true);
         navMeshAgent.nextPosition = transform.position;
         collided = false;
     }
@@ -74,5 +77,12 @@ public class AIcontroller : MonoBehaviour
         GetComponent<Animator>().SetBool("Run", true);
         started = true;
         navMeshAgent.nextPosition = transform.position; //reset navmesh path
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Checkpoint"))
+        {
+            checkPoint = other.gameObject.transform.parent;
+        }
     }
 }
