@@ -22,8 +22,8 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
-         SpawnPlayer();
-         SpawnAI();
+        SpawnPlayer();
+        SpawnAI();
     }
 
     private void Start()
@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     private void LateUpdate()
     {
@@ -50,13 +50,13 @@ public class GameManager : MonoBehaviour
         int x = spawnPos.Count;
         for (int i = 0; i < x; i++)
         {
-          int RandomNum = Random.Range(0, spawnPos.Count);
-        GameObject aiChar=Instantiate(girlPrefab, (spawnPos[RandomNum]), Quaternion.identity);
+            int RandomNum = Random.Range(0, spawnPos.Count);
+            GameObject aiChar = Instantiate(girlPrefab, (spawnPos[RandomNum]), Quaternion.identity);
             aiChars.Add(aiChar);
-        spawnPos.RemoveAt(RandomNum);
+            spawnPos.RemoveAt(RandomNum);
         }
 
-       
+
     }
     IEnumerator StartGame()
     {
@@ -78,9 +78,9 @@ public class GameManager : MonoBehaviour
     {
         playerRank = 1;
         Vector3 playerLoc = boy.transform.position;
-        for(int i=0;i<aiChars.Count;i++)
+        for (int i = 0; i < aiChars.Count; i++)
         {
-            if (aiChars[i].transform.position.z>=playerLoc.z) //check if ai is further than player
+            if (aiChars[i].transform.position.z >= playerLoc.z) //check if ai is further than player
             {
                 playerRank++;
             }
@@ -93,5 +93,13 @@ public class GameManager : MonoBehaviour
     {
         aiChars.Remove(gameObject);
         finishedCount++;
+    }
+    public void Pause()
+    {
+        Time.timeScale = 0f;
+    }
+    public void UnPause()
+    {
+        Time.timeScale = 1f;
     }
 }

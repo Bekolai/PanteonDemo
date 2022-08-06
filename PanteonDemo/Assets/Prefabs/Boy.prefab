@@ -522,7 +522,7 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 8277af9fd88a64f4ca4622ea084e8b15, type: 2}
-  - {fileID: -294345951546090246, guid: 250e330daa2c20843ab24af32bd6bf58, type: 3}
+  - {fileID: 2100000, guid: 1f6c6c780143c4b44b51c48473b7df0d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1076,6 +1076,7 @@ GameObject:
   - component: {fileID: -1675424688464257259}
   - component: {fileID: 7620000115444153124}
   - component: {fileID: 8182577974168898070}
+  - component: {fileID: 2582633592326395945}
   m_Layer: 0
   m_Name: Boy
   m_TagString: Untagged
@@ -1166,6 +1167,18 @@ MonoBehaviour:
   playerSpeed: 100
   xSpeed: 3
   xClamp: 1.15
+--- !u!114 &2582633592326395945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7614681413798562513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c516d390b7643a4fba79e9d0ec18a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8164163142105206552
 GameObject:
   m_ObjectHideFlags: 0
