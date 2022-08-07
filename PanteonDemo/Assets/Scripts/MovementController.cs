@@ -25,7 +25,7 @@ public class MovementController : MonoBehaviour
     private void Start()
     {
 
-
+       // StartMovement();
         StopMovement();
         rb = GetComponent<Rigidbody>();
     }
@@ -35,7 +35,8 @@ public class MovementController : MonoBehaviour
     {
 
          Movement();
-        
+      //  transform.Translate(Time.deltaTime * Vector3.right*1); //rotating stick force
+
 
     }
     private void Update()
@@ -58,7 +59,10 @@ public class MovementController : MonoBehaviour
 
     void Movement()
     {
-        rb.velocity = Vector3.forward * _playerSpeed * Time.deltaTime;
+        Vector3 movement = Vector3.forward * _playerSpeed * Time.deltaTime;
+        movement.y = rb.velocity.y; //saving y velocity to use gravity
+        //  rb.velocity = Vector3.forward * _playerSpeed * Time.deltaTime;
+        rb.velocity = movement; //add forward velocity
         if (Math.Abs(_mousePos.x - transform.position.x) > 0.25f )
          {
           transform.Translate(Time.deltaTime * direction, 0, 0);

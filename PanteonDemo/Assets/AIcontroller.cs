@@ -36,12 +36,15 @@ public class AIcontroller : MonoBehaviour
         if (!collided &&started)
 
         {
+            
             transform.position = Vector3.SmoothDamp(transform.position,
             navMeshAgent.nextPosition,
             ref velocity,
             0.1f);   //fixes the jittery navmesh movement
+
         }
        
+
     }
     private void OnCollisionEnter(Collision collision)
     {

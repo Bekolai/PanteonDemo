@@ -102,4 +102,10 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
     }
+    public void Quit()
+    {
+        Application.Quit();
+    }
+  
+    
 }

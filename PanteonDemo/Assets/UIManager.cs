@@ -10,9 +10,10 @@ public class UIManager : MonoBehaviour
     public Resolution[] resolutions;
     public TMP_Dropdown resDropdown;
     public bool portraitModeBool=true;
+    public bool windowedMode = true;
     void Start()
     {
-        Screen.SetResolution(1080, 1920, Screen.fullScreenMode = FullScreenMode.Windowed); //native res
+       // Screen.SetResolution(1080, 1920, Screen.fullScreenMode = Screen.fullScreenMode); //native res
        
         resolutions = Screen.resolutions;
         resDropdown.ClearOptions();
@@ -51,16 +52,25 @@ public class UIManager : MonoBehaviour
         Resolution resolution = resolutions[resolutionIndex];
         if(!portraitModeBool)
         {
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreenMode=FullScreenMode.Windowed); // if not portrait just give resolution directly
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreenMode=Screen.fullScreenMode); // if not portrait just give resolution directly
         }
         else
         {
-            Screen.SetResolution(resolution.height,resolution.width , Screen.fullScreenMode = FullScreenMode.Windowed); //if portrair switch height and width
+            Screen.SetResolution(resolution.height,resolution.width , Screen.fullScreenMode = Screen.fullScreenMode); //if portrair switch height and width
         }
         
     }
     public void PortraitChange()
     {
         portraitModeBool = !portraitModeBool;
+    }
+    public void fullscreenChange()
+    { 
+      
+        if (windowedMode) Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+        else Screen.fullScreenMode = FullScreenMode.Windowed;
+
+        windowedMode = !windowedMode;
+       
     }
 }
