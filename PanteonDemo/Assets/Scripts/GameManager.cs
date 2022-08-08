@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject girlPrefab, boy;
+    public GameObject girlPrefab, boy,paintCanvas;
     public List<Vector3> spawnPos;
     public List<GameObject> aiChars;
     public TMP_Text countdownText, rankingText;
     int playerRank, finishedCount;
+    bool finished;
 
     public static GameManager Instance { get; private set; }
     private void Awake()
@@ -37,7 +39,11 @@ public class GameManager : MonoBehaviour
     }
     private void LateUpdate()
     {
-        checkRanking();
+        if (!finished)
+        {
+         checkRanking();
+        }
+        
     }
     void SpawnPlayer()
     {
@@ -106,6 +112,17 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
     }
-  
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex));
+    }
+    public void PlayerFinish(GameObject player)
+    {
+        finished = true;
+        int _playerRank = playerRank;
+        rankingText.text = "Finished: "+_playerRank.ToString() + "/11";
+        paintCanvas.SetActive(true);
+        
+    }
     
 }

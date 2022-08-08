@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public class PlayerController : MonoBehaviour
 {
     MovementController movementController;
@@ -29,6 +29,13 @@ public class PlayerController : MonoBehaviour
             CollideManager.Instance.HandleRespawn(gameObject,checkPoint);
             StartCoroutine(collideReset());
         }
+        if (collision.gameObject.CompareTag("Finish"))
+        {
+            movementController.StopMovement();
+            GetComponent<Animator>().SetBool("Run", false);
+            transform.DOMove(new Vector3(0, transform.position.y, transform.position.z + 2),1f);
+            GameManager.Instance.PlayerFinish(gameObject);
+        }
 
     }
     IEnumerator collideReset()
@@ -51,5 +58,11 @@ public class PlayerController : MonoBehaviour
         {
             checkPoint = other.gameObject.transform.parent;
         }
+     /*   if (other.gameObject.CompareTag("Knockback"))
+        {
+            Vector3 moveDirectionPush = gameObject.transform.position - other.transform.position;
+            moveDirectionPush.y = 0f;
+            GetComponent<Rigidbody>().AddForce(moveDirectionPush.normalized * 25f,ForceMode.Impulse);
+        }*/ //Rotator stick test
     }
 }

@@ -9,6 +9,8 @@ TagManager:
   - Rotator
   - Spawner
   - Checkpoint
+  - Knockback
+  - PaintCanvas
   layers:
   - Default
   - TransparentFX
